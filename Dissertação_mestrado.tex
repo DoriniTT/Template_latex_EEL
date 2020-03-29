@@ -1,0 +1,320 @@
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	twoside,			% para impressão em recto e verso. Oposto a oneside
+	a4paper,			% tamanho do papel. 
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{abntex2}
+
+% ---
+% Pacotes básicos 
+% ---
+\usepackage{mathptmx}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 		% para melhorias de justificação
+%\usepackage{subfig}
+\usepackage[font=small]{caption}
+\usepackage{setspace}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\usepackage[top=3cm, bottom=2cm, inner=3.5cm, outer=2cm]{geometry}
+% ---
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{extarrows}
+\usepackage{braket}
+\usepackage{subcaption}
+
+\usepackage{fancyhdr}%Pacote para mudar o cabeçalho das páginas.
+
+% ---
+\usepackage{multirow}
+\usepackage{textcomp}
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+%\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+\usepackage{fancyhdr}
+\fancyhf{}
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+\graphicspath{{./Figuras/}} 
+
+\titulo{Modelo de dissertação da EEL}
+\autor{Thiago Trevizam Dorini}
+\local{Lorena}
+\data{Ano}
+%\orientador{Prof. Dr. Luiz Tadeu Fernandes Eleno}
+%\coorientador{Prof. Dr. Gilberto Carvalho Coelho}
+\instituicao{%
+  Versão original}
+\tipotrabalho{Dissertação (Mestrado)}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{
+	\fontsize{12}{12}\selectfont
+	Dissertação apresentado à Escola de Engenharia de Lorena da Universidade de São Paulo para a obtenção do título de Mestre em Ciências do Programa de Pós-Graduação em Engenharia de Materiais na area de Materiais Convencionais e Avançados.
+	\newline
+	\newline
+	Orientador: Prof. Dr. Fulano de tal
+}
+
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pageref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=black,          	% color of internal links
+    	citecolor=black,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=black,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+\makeatletter
+\setlength{\@fptop}{5pt} % Set distance from top of page to first float
+\makeatother
+% ---
+
+\newcommand{\quadroname}{Quadro}
+\newcommand{\listofquadrosname}{Lista de quadros}
+
+\newfloat[chapter]{quadro}{loq}{\quadroname}
+\newlistof{listofquadros}{loq}{\listofquadrosname}
+\newlistentry{quadro}{loq}{0}
+
+% configurações para atender às regras da ABNT
+\setfloatadjustment{quadro}{\centering}
+\counterwithout{quadro}{chapter}
+\renewcommand{\cftquadroname}{\quadroname\space} 
+\renewcommand*{\cftquadroaftersnum}{\hfill--\hfill}
+
+\setfloatlocations{quadro}{hbtp} % Ver https://github.com/abntex/abntex2/issues/176
+
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ---
+\imprimirfolhaderosto*
+
+
+\begin{fichacatalografica}
+	\sffamily
+	\vspace*{\fill}					% Posição vertical
+	\begin{center}					% Minipage Centralizado
+	\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
+	\small
+	\imprimirautor
+	%Sobrenome, Nome do autor
+	
+	\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
+	\imprimirlocal, \imprimirdata-
+	
+	\hspace{0.5cm} \thelastpage p. : il. (algumas color.) ; 30 cm.\\
+	
+	\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
+	
+	\hspace{0.5cm}
+	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
+	\imprimirdata.}\\
+	
+	\hspace{0.5cm}
+		1. Palavra-chave1.
+		2. Palavra-chave2.
+		2. Palavra-chave3.
+		I. Orientador.
+		II. Universidade xxx.
+		III. Faculdade de xxx.
+		IV. Título 			
+	\end{minipage}}
+	\end{center}
+\end{fichacatalografica}
+% ---
+
+\newpage
+\begin{dedicatoria}
+   \vspace*{\fill}
+   \centering
+   \noindent
+   \textit{Espero que este template ajude nas monografias e dissertações dos alunos da EEL.} \vspace*{\fill}
+\end{dedicatoria}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+\begin{agradecimentos}
+	
+	
+
+\end{agradecimentos}
+% ---
+
+% ---
+% Epígrafe
+% ---
+\begin{epigrafe}
+    \vspace*{\fill}
+	\begin{flushright}
+		\textit{Acreditar em nossa própria mentira é o primeiro passo\\
+		para o estabelecimento de uma nova verdade.\\
+    (Carlos Drummond de Andrade)	}
+	\end{flushright}
+\end{epigrafe}
+% ---
+
+% ---
+% RESUMOS
+% ---
+
+% resumo em português
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}[RESUMO]
+	
+\'ULTIMO SOBRENOME, T. T. \textbf{Título do trabalho}. Ano. Número de páginas (Ex: 85p.) Dissertação (Mestrado em Ciências) - Escola de Engenharia de Lorena, Universidade de São Paulo, Lorena, 2019.
+
+Faça um resumo do seu trabalho com uma pequena introdução, o objetivo a ser alcançado, uma breve descrição dos resultados, e termine com a conclusão.
+
+ \textbf{Palavras-chave}: Colocar umas 7 palavras chaves. Chave 2. Chave 3. Chave 4, Chave 5, Chave 6.
+ 
+ 
+\end{resumo}
+
+% resumo em inglês
+\begin{resumo}[ABSTRACT]
+ \begin{otherlanguage*}{english}
+ 	
+\'ULTIMO SOBRENOME, T. T. \textbf{Título do trabalho em inglês}. Ano. Páginas p. Dissertation (Master of Science). Escola de Engenharia de Lorena, Universidade de São Paulo, Lorena, 2019.
+
+Pratique seu inglês! Tente não usar o google tradutor. Ou use, ninguém vai perceber mesmo.
+ 
+   \noindent 
+   \textbf{Keywords}: Palavras-chave em inglês.
+     
+ \end{otherlanguage*}
+\end{resumo}
+  
+% ---
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+\begin{siglas}
+	\item[PGM] \textit{Platinum Group Metal}
+	\item[TBC] \textit{Thermal Barrier Coating}
+	
+\end{siglas}
+%\addcontentsline{toc}{chapter}{Lista de abreviaturas e siglas}
+
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+
+\begin{simbolos}
+	
+	\item[$ \Delta_fH$ ] Entalpia de formação
+	\item[$ \hat{H} $] Operador Hamiltoniano
+	\item[E] Autovalor de um operador do tipo hamiltoniano
+	\item[$ \Psi $] Função de onda, autofunção do operador $\hat{H}$ com autovalor E
+	
+\end{simbolos}
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+%\addcontentsline{toc}{chapter}{Lista de símbolos}
+
+% ---
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+\pagestyle{fancy} %Estilo das páginas usando o pacote fancy.
+\fancyhead[EL,OR]{\thepage} %O número das páginas pares (even E) fica à esqueda (left L), enquanto que das páginas ímpares (odd O) fica à direita (right R).
+\renewcommand{\headrulewidth}{0pt} %Linha embaixo do número da página com espessura 0.
+
+\input{Introducao.tex}
+
+% ----------------------------------------------------------
+\input{Revisao_bib.tex}
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+\input{Mat-met.tex}
+
+\input{Resultados.tex}
+%--------------------------------------------------------
+\input{Conclusao.tex}
+%
+
+\postextual
+
+\bibliography{Cr-Si-B.bib}
+%Deve-se criar um arquivo \textit{.bib} 
+
+\input{Anexos.tex}
+
+\end{document}

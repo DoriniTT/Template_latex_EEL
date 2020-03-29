@@ -1,0 +1,43 @@
+\chapter*{Anexos}
+\label{anexo:refinamentos}
+\addcontentsline{toc}{chapter}{ANEXOS}
+%Adiciona o capítulo ANEXOS ao sumário
+
+\renewcommand\thesection{A}
+%Ao invés de colocar no sumário em números, este renewcommand coloca como A, ou B, ou C... Tem que mudar manualmente!
+
+\section{Código Python para conversão de bases}
+\label{Python-Conversão de bases}
+
+O pacote \textit{verbatim} configura tudo como texto corrido.
+
+\begin{verbatim}
+
+#Pacotes do python.
+import numpy as np
+import numpy.linalg as la
+
+#Define uma lista alat extraindo os valores do arquivo de entrada.
+alat = np.genfromtxt('atomic-positions-alat.txt')
+
+#Define as bases.
+b1 = np.array([[1.,0.,0.],[0.,1.,0.],[0.,0.,1]]) # alat
+b2 = .5 * np.array( [ [1.,-1.,1.], [1.,1.,1.], [-1.,-1.,1.] ] ) 
+# crystal, ibrav=7
+
+#Operação de matrizes.
+M1 = np.transpose(b1)
+M2 = np.transpose(b2)
+M2inv = la.inv(M2)
+
+#Cálculo da mudança de base.
+T = np.dot(M2inv,M1)
+
+#Cria uma matriz de zeros 3x3.
+crystal = np.zeros([len(alat),3])
+
+#Adiciona os valores convertidos a lista crystal após a mudança de base.
+for i in range(len(alat)):
+crystal[i] = (np.dot(T, alat[i]))
+print "%21.9ft%12.9ft\%12.9f" % (crystal[i,0], crystal[i,1], crystal[i,2])
+\end{verbatim}
